@@ -91,33 +91,32 @@ class MyCompany(Warehouse):
 
         # pass
 
-class OfficeEquipment(Warehouse):
+class OfficeEquipment:
     '''OfficeEquipment - Класс оргтехника базовый для классов наследников'''
     count = 0
-    def __init__(self, serial_number, model, price, dpi, paper_size, jet_type): 
+    def __init__(self, serial_number, model, price, dpi, paper_size, jet_type): # dpi, paper_size, jet_type):
         self.serial_number = serial_number
         self.price = price
         self.model = model
         self.dpi = dpi
         self.paper_size = paper_size
         self.jet_type = jet_type
-
+        
         self.device_info_dict = {self.serial_number: [self.model, self.price, self.dpi, self.paper_size, self.jet_type]}
 
     def add_warehouse(self):
         """
         Передаёт новый экземпляр техники на склад.
-        return: Ничего не возрашает.
         """
         # pass
-        self.warehous_office_dict[self.jet_type][self.serial_number] = self.device_info_dict[self.serial_number]
+        Warehouse.warehous_office_dict[self.jet_type][self.serial_number] = self.device_info_dict[self.serial_number]
+        
 
 class Printer(OfficeEquipment):
     '''Printer наследник класса - OfficeEquipment - Класс оргтехника. В классе Printer
     реализовать уникальные параметры для данного типа техники'''
     def __init__(self, serial_number, model, price, dpi, paper_size, jet_type): 
         super().__init__(serial_number, model, price, dpi, paper_size, jet_type) 
-        
         self.device_info_dict = {
             serial_number: [self.model, self.price, self.dpi, self.paper_size,
                                                          self.jet_type]} 
@@ -130,11 +129,10 @@ class Scaner(OfficeEquipment):
 
     def __init__(self, serial_number, model, price, dpi, paper_size, jet_type):  
         super().__init__(serial_number, model, price, dpi, paper_size, jet_type)  
-        
         OfficeEquipment.count += 1
         self.device_info_dict = {
             serial_number: [self.model, self.price, self.dpi, self.paper_size,
-                                    self.jet_type]} 
+                                    self.jet_type]}  
 
 class Xerox(OfficeEquipment):
     '''Xerox наследник класса - OfficeEquipment - Класс оргтехника. В классе Xerox
@@ -142,7 +140,6 @@ class Xerox(OfficeEquipment):
 
     def __init__(self, serial_number, model, price, dpi, paper_size, jet_type):  
         super().__init__(serial_number, model, price, dpi, paper_size, jet_type)  
-
         self.device_info_dict = {
             serial_number: [self.model, self.price, self.dpi, self.paper_size,
                                     self.jet_type]}  
